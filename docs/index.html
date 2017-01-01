@@ -21,15 +21,23 @@
     cursor:pointer;
     background-color: transparent;
   }
-  .button-toggle::before { content:"✚" }
+  .button-toggle::before {
+    content: "✚";
+    border: 1px solid;
+    padding: 0 0.2em;
+  }
   .show-content .button-toggle::before, .all-content.show-content ~ .title .button-toggle::before { content:"—" }
   .button-toggle {
     background: rgba(0, 0, 0, 0) none repeat scroll 0 center;
-    border: 1px solid;
+    border: 0 none;
     vertical-align: 0.3em;
   }
-  .title { font-size:2em }
-  .title + .content, .search-in-progress ~ .title .button-toggle { display:none }
+  .title {
+    font-size: 2em;
+    margin-top: 0.3em;
+    margin-bottom: 0;
+  }
+  .title + .content, .search-in-progress ~ .title .button-toggle::before { display:none }
   .title.show-content + .content, .all-content.show-content ~ .content, .search-in-progress ~ .content { display:block }
   #search_button {
     background-color: green;
@@ -155,7 +163,7 @@
   <button type="button" id="search_button">Go</button>
   <button type="button" id="search_clear_button">Clear</button>
 </div>
-<h2 class="title"><button type="button" class="button-toggle"></button> Alphabetical Order</h2>
+<h2 class="title"><button type="button" class="button-toggle"> Alphabetical Order</button></h2>
 <div class="content">
   <button type="button" class="char" data-decimal="9398" data-entity="&amp;#9398;" title="Circled Latin Capital Letter A">Ⓐ</button>
   <button type="button" class="char" data-decimal="9424" data-entity="&amp;#9424;" title="Circled Latin Small Letter A">ⓐ</button>
@@ -1018,7 +1026,7 @@
   <button type="button" class="char" data-decimal="8488" data-entity="&amp;#8488;" title="Black Letter Capital Z">ℨ</button>
   <button type="button" class="char" data-decimal="8484" data-entity="&amp;#8484;" title="Double Struck Capital Z">ℤ</button>
 </div>
-<h2 class="title"><button type="button" class="button-toggle"></button> Arrows</h2>
+<h2 class="title"><button type="button" class="button-toggle"> Arrows</button></h2>
 <div class="content">
   <button type="button" class="char" data-decimal="8618" data-entity="&amp;#8618;" title="Rightwards Arrow With Hook">↪</button>
   <button type="button" class="char" data-decimal="8617" data-entity="&amp;#8617;" title="Leftwards Arrow With Hook">↩</button>
@@ -1341,7 +1349,7 @@
   <button type="button" class="char" data-decimal="9029" data-entity="&amp;#9029;" title="Apl Functional Symbol Leftwards Vane">⍅</button>
   <button type="button" class="char" data-decimal="9030" data-entity="&amp;#9030;" title="Apl Functional Symbol Rightwards Vane">⍆</button>
 </div>
-<h2 class="title"><button type="button" class="button-toggle"></button> Currency</h2>
+<h2 class="title"><button type="button" class="button-toggle"> Currency</button></h2>
 <div class="content">
   <button type="button" class="char" data-decimal="8371" data-entity="&amp;#8371;" title="Austral Sign">₳</button>
   <button type="button" class="char" data-decimal="3647" data-entity="&amp;#3647;" title="Thai Currency Symbol Baht">฿</button>
@@ -1385,7 +1393,7 @@
   <button type="button" class="char" data-decimal="2547" data-entity="&amp;#2547;" title="Bengali Rupee Sign">৳</button>
   <button type="button" class="char" data-decimal="8377" data-entity="&amp;#8377" title="Indian Rupee Sign">₹</button>
 </div>
-<h2 class="title"><button type="button" class="button-toggle"></button> Emojis</h2>
+<h2 class="title"><button type="button" class="button-toggle"> Emojis</button></h2>
 <div class="content">
   <button type="button" class="char" data-entity="" title="Emoji">🎳</button>
   <button type="button" class="char" data-entity="" title="Emoji">🏂</button>
@@ -1870,7 +1878,7 @@
   <button type="button" class="char" data-entity="" title="Emoji">🌂</button>
   <button type="button" class="char" data-entity="" title="Emoji">💼</button>
 </div>
-<h2 class="title"><button type="button" class="button-toggle"></button> Graphic Shapes</h2>
+<h2 class="title"><button type="button" class="button-toggle"> Graphic Shapes</button></h2>
 <div class="content">
   <button type="button" class="char" data-decimal="9650" data-entity="&amp;#9650;" title="Black Up Pointing Triangle">▲</button>
   <button type="button" class="char" data-decimal="9660" data-entity="&amp;#9660;" title="Black Down Pointing Triangle">▼</button>
@@ -2270,7 +2278,7 @@
   <button type="button" class="char" data-decimal="9579" data-entity="&amp;#9579;" title="Box Drawings Vertical Double And Horizontal Single">╫</button>
   <button type="button" class="char" data-decimal="9580" data-entity="&amp;#9580;" title="Box Drawings Double Vertical And Horizontal">╬</button>
 </div>
-<h2 class="title"><button type="button" class="button-toggle"></button> Mathematical</h2>
+<h2 class="title"><button type="button" class="button-toggle"> Mathematical</button></h2>
 <div class="content">
   <button type="button" class="char" data-decimal="8734" data-entity="&amp;infin;" title="Infinity">∞</button>
   <button type="button" class="char" data-decimal="10176" data-entity="&amp;#10176;" title="Three Dimensional Angle">⟀</button>
@@ -2696,7 +2704,7 @@
   <button type="button" class="char" data-decimal="10006" data-entity="&amp;#10006;" title="Heavy Multiplication X">✖</button>
   <button type="button" class="char" data-decimal="10010" data-entity="&amp;#10010;" title="Heavy Greek Cross">✚</button>
 </div>
-<h2 class="title"><button type="button" class="button-toggle"></button> Numerals</h2>
+<h2 class="title"><button type="button" class="button-toggle"> Numerals</button></h2>
 <div class="content">
   <button type="button" class="char" data-decimal="9461" data-entity="&amp;#9461;" title="Double Circled Digit One">⓵</button>
   <button type="button" class="char" data-decimal="9462" data-entity="&amp;#9462;" title="Double Circled Digit Two">⓶</button>
@@ -2833,7 +2841,7 @@
   <button type="button" class="char" data-decimal="8541" data-entity="&amp;#8541;" title="Vulgar Fraction Five Eighths">⅝</button>
   <button type="button" class="char" data-decimal="8542" data-entity="&amp;#8542;" title="Vulgar Fraction Seven Eighths">⅞</button>
 </div>
-<h2 class="title"><button type="button" class="button-toggle"></button> Punctuation</h2>
+<h2 class="title"><button type="button" class="button-toggle"> Punctuation</button></h2>
 <div class="content">
   <button type="button" class="char" data-decimal="10077" data-entity="&amp;#10077;" title="Heavy Double Turned Comma Quotation Mark Ornament">❝</button>
   <button type="button" class="char" data-decimal="10078" data-entity="&amp;#10078;" title="Heavy Double Comma Quotation Mark Ornament">❞</button>
@@ -3044,7 +3052,7 @@
   <button type="button" class="char" data-decimal="9137" data-entity="&amp;#9137;" title="Upper Right Or Lower Left Curly Bracket Section">⎱</button>
   <button type="button" class="char" data-decimal="39" data-entity="&amp;#39;" title="Apostrophe">'</button>
 </div>
-<h2 class="title"><button type="button" class="button-toggle"></button> Symbols</h2>
+<h2 class="title"><button type="button" class="button-toggle"> Symbols</button></h2>
 <div class="content">
   <button type="button" class="char" data-decimal="9730" data-entity="&amp;#9730;" title="Umbrella">☂</button>
   <button type="button" class="char" data-decimal="9748" data-entity="&amp;#9748;" title="Umbrella With Rain Drops">☔</button>
