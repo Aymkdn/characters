@@ -25,6 +25,7 @@
     content: "✚";
     border: 1px solid;
     padding: 0 0.2em;
+    display: inline-block;
   }
   .show-content .button-toggle::before, .all-content.show-content ~ .title .button-toggle::before { content:"—" }
   .button-toggle {
@@ -3335,6 +3336,34 @@
 </div>
 <div class="md-overlay"></div>
 <script>
+// http://stackoverflow.com/questions/28815845/mouseevent-not-working-in-internet-explorer
+if (typeof MouseEvent !== 'function') {
+  (function (){
+    var _MouseEvent = window.MouseEvent;
+    window.MouseEvent = function (type, dict){
+      dict = dict | {};
+      var event = document.createEvent('MouseEvents');
+      event.initMouseEvent(
+        type,
+        (typeof dict.bubbles == 'undefined') ? true : !!dict.bubbles,
+        (typeof dict.cancelable == 'undefined') ? false : !!dict.cancelable,
+        dict.view || window,
+        dict.detail | 0,
+        dict.screenX | 0,
+        dict.screenY | 0,
+        dict.clientX | 0,
+        dict.clientY | 0,
+        !!dict.ctrlKey,
+        !!dict.altKey,
+        !!dict.shiftKey,
+        !!dict.metaKey,
+        dict.button | 0,
+        dict.relatedTarget || null
+      );
+      return event;
+    }
+  })();
+}
 !function() {
   // deal with chars
   var clickChar=function(event) {
@@ -3348,19 +3377,25 @@
       document.querySelector('#modal').classList.toggle("md-show",true);
     }
   }
-  document.querySelectorAll(".char").forEach(function(elem) {
-    var attr = elem.getAttribute("data-entity");
-    if (attr) elem.innerHTML = attr;
-    elem.setAttribute("data-titlelowercase", elem.getAttribute("title").toLowerCase());
-    // bind the click of the char, except for Emoji
-    if (attr) {
-      elem.addEventListener('click', clickChar);
-      elem.addEventListener('keydown', function(event) {
-        var c=event.which||event.keyCode;
-        if (c===32 || c===13) clickChar(event);
-      });
+  !function() {
+    var nodes=document.querySelectorAll(".char");
+    var elem, attr;
+    for (var i=0, len=nodes.length; i<len; i++) {
+      elem=nodes[i];
+      attr = elem.getAttribute("data-entity");
+      if (attr) elem.innerHTML = attr;
+      elem.setAttribute("data-titlelowercase", elem.getAttribute("title").toLowerCase());
+      // bind the click of the char, except for Emoji
+      if (attr) {
+        elem.addEventListener('click', clickChar);
+        elem.addEventListener('keydown', function(event) {
+          var c=event.which||event.keyCode;
+          if (c===32 || c===13) clickChar(event);
+        });
+      }
     }
-  })
+  }();
+
   // close modal
   document.querySelector('.md-overlay').addEventListener('click', function() { document.querySelector("#modal").classList.remove("md-show") })
   document.documentElement.addEventListener('keydown', function(event) {
@@ -3369,18 +3404,24 @@
   });
 
   // bind the toggle buttons
-  document.querySelectorAll('.button-toggle').forEach(function(elem) {
-    elem.addEventListener('click', function() {
-      this.parentNode.classList.toggle("show-content")
-    });
-  })
+  !function() {
+    var nodes=document.querySelectorAll('.button-toggle');
+    var elem;
+    for (var i=0, len=nodes.length; i<len; i++) {
+      elem=nodes[i];
+      elem.addEventListener('click', function() {
+        this.parentNode.classList.toggle("show-content")
+      });
+    }
+  }()
 
   // bind search
   document.querySelector('#search_button').addEventListener('click', function() {
     var val=document.querySelector('#search').value, style=document.querySelector('#style_search');
     if (style) style.parentNode.removeChild(style);
     if (val) {
-      this.parentNode.classList.toggle("search-in-progress", true);
+      console.log("=>",this.parentNode.className)
+      if (this.parentNode.className.indexOf("search-in-progress")===-1) this.parentNode.classList.add("search-in-progress");
       addStylesheetRules([ ['.char[data-titlelowercase*="'+val.toLowerCase()+'"]', ['display','inline-block',true] ], ['.char', ['display','none'] ] ]);
     }
   });
