@@ -148,8 +148,8 @@
   #modal_char_text {
     font-size: 5em;
   }
-  #modal_char_html {
-    font-size: 3em;
+  #modal_char_html,#modal_char_content {
+    font-size: 2em;
   }
   </style>
 </head>
@@ -3330,7 +3330,10 @@
     <div class="md-message">
       <div id="modal_char_descr"></div>
       <div id="modal_char_text"></div>
+      <label for="modal_char_html">HTML:</label>
       <div id="modal_char_html"></div>
+      <label for="modal_char_content">CSS:</label>
+      <div id="modal_char_content"></div>
     </div>
   </div>
 </div>
@@ -3368,11 +3371,13 @@ if (typeof MouseEvent !== 'function') {
   // deal with chars
   var clickChar=function(event) {
     var char = event.target || event.srcElement;
+    var entity;
     if (char) {
       document.querySelector('#modal_char_descr').innerHTML=char.getAttribute("title");
-      char=char.getAttribute("data-entity");
-      document.querySelector('#modal_char_text').innerHTML=char;
-      document.querySelector('#modal_char_html').innerHTML=char.replace(/&/,"&amp;");
+      entity=char.getAttribute("data-entity");
+      document.querySelector('#modal_char_text').innerHTML=entity;
+      document.querySelector('#modal_char_html').innerHTML=entity.replace(/&/,"&amp;");
+      document.querySelector('#modal_char_content').innerHTML='content("'+convertToHexCSS(char.getAttribute("data-decimal"))+'")';
       // show modal
       document.querySelector('#modal').classList.toggle("md-show",true);
     }
@@ -3465,6 +3470,15 @@ if (typeof MouseEvent !== 'function') {
     }
   }
 }()
+
+// source : http://www.evotech.net/articles/testjsentities.html
+function convertToHexCSS(val) {
+  var hexValue = Number(val.replace(/\D/g, '')).toString(16);
+  while(hexValue.length<4){
+    hexValue = "0" + hexValue;
+  }
+  return '\\'  + hexValue.toUpperCase();
+}
 </script>
 </body>
 </html>
